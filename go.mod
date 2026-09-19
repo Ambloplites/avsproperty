@@ -1,4 +1,4 @@
-module github.com/YoshihikoAbe/avsproperty
+module github.com/Ambloplites/avsproperty
 
 go 1.21.1
 

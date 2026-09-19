@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/YoshihikoAbe/avsproperty"
+	"github.com/Ambloplites/avsproperty"
 )
 
 func main() {
