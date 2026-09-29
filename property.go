@@ -32,7 +32,7 @@ type PropertySettings struct {
 type Property struct {
 	// Settings defines how a property should be serialized.
 	// After a read operation (successful or not) this field
-	// is automatically updatedwith the settings of the
+	// is automatically updated with the settings of the
 	// property that was read.
 	Settings PropertySettings
 
@@ -153,7 +153,7 @@ func (a Attribute) Key() *NodeName {
 	return a.key
 }
 
-// Attribute represents a node in a property tree
+// Node represents a node in a property tree
 type Node struct {
 	parent *Node
 
@@ -179,7 +179,7 @@ func NewNode(name string) (*Node, error) {
 	}, nil
 }
 
-// NewNode creates a new Node using the supplied name and value
+// NewNodeWithValue creates a new Node using the supplied name and value
 func NewNodeWithValue(name string, value any) (*Node, error) {
 	n, err := NewNode(name)
 	if err != nil {
@@ -212,7 +212,7 @@ func (n *Node) IsArray() bool {
 }
 
 // ShallowCopy creates a shallow copy of the node and its children.
-// Changes made to node names, attribute keys, and mutable values,
+// Changes made to node names, attribute keys, and mutable values
 // will be reflected in both copies.
 func (n Node) ShallowCopy() *Node {
 	new := &n
@@ -314,12 +314,12 @@ func (n *Node) ChildValueNodeName(name *NodeName) any {
 
 // Attributes returns a list of the Node's attributes. The returned slice is owned
 // by the Node and should not be modified in any way.
-// This function may return nil the Node does not have any attributes
+// This function may return nil if the Node does not have any attributes
 func (n *Node) Attributes() []*Attribute {
 	return n.attributes
 }
 
-// SearchAttributeNodeName returns an attribute with the
+// SearchAttribute returns an attribute with the
 // specified key, or nil if no attribute is found
 func (n *Node) SearchAttribute(k string) *Attribute {
 	if k, err := NewNodeName(k); err != nil {
@@ -391,7 +391,7 @@ func (n *Node) IntValue() int64 {
 	}
 }
 
-// IntValue returns the Node's value as an unsigned integer, or 0 if the
+// UintValue returns the Node's value as an unsigned integer, or 0 if the
 // Node does not contain an unsigned integer value.
 func (n *Node) UintValue() uint64 {
 	switch v := n.value.(type) {
@@ -439,7 +439,7 @@ func (n *Node) AppendChild(c *Node) error {
 	return nil
 }
 
-// NewNode creates a new Node, and adds it as the last child of the Node.
+// NewNode creates a new Node and adds it as the last child of the Node.
 func (n *Node) NewNode(name string) (*Node, error) {
 	c, err := NewNode(name)
 	if err != nil {
@@ -455,7 +455,7 @@ func (n *Node) NewNode(name string) (*Node, error) {
 	return c, nil
 }
 
-// NewNode creates a new Node with a value, and adds it as the last child of the Node.
+// NewNodeWithValue creates a new Node with a value and adds it as the last child of the Node.
 func (n *Node) NewNodeWithValue(name string, value any) (*Node, error) {
 	c, err := NewNodeWithValue(name, value)
 	if err != nil {
